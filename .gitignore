@@ -1,0 +1,3 @@
+media.db
+*.db
+__pycache__/
