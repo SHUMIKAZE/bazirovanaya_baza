@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS works (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    original_title TEXT,
+    title TEXT,
+    original_title TEXT NOT NULL,
+    native_title TEXT,
     type TEXT NOT NULL,
     release_year INTEGER
 );
