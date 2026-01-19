@@ -1,3 +1,4 @@
+import db
 import command_handler
 import table_renderer
 
@@ -25,3 +26,6 @@ while True:
 
     if action["type"] == "table":
         table_renderer.render(action["data"])
+
+    if action["type"] == "add_work":
+        db.add_work(action["data"])

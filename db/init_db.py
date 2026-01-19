@@ -4,7 +4,7 @@ from pathlib import Path
 DB_PATH = Path("media.db")
 SCHEMA_PATH = Path("db/schema.sql")
 
-REWRITTING_PASSWORD = "REWRITE_THAT_SHIT"
+REWRITTING_PASSWORD = "REWRITE"
 
 def init_db():
     if DB_PATH.exists():
