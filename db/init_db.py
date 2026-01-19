@@ -23,7 +23,7 @@ def init_db():
 if __name__ == "__main__":
     init_db()
     print("DB ready.")
-    while input(f"If you want to rewrite DB type >>{REWRITTING_PASSWORD}<<\n >>> ") == REWRITTING_PASSWORD:
+    while input(f"If you want to rewrite DB type '{REWRITTING_PASSWORD}': ") == REWRITTING_PASSWORD:
         print("Deleting...")
         DB_PATH.unlink()
         init_db()
