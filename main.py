@@ -1,36 +1,32 @@
 from pathlib import Path
-import db
-import command_handler
-import table_renderer
+import db_package as db
+from command_handler import handle
 
 
-CONTINUE = True
-while CONTINUE:
-    DB_PATH = Path("media.db")
-    db.init(DB_PATH)
-    print("App started.")
+DB_PATH = Path("media.db")
+SCHEMA_PATH = Path("db_package/schema.sql")
 
-    while True:
-        try:
-            user_input = input(">>> ")
-        except KeyboardInterrupt:
-            user_input = "quit"
-        except EOFError:
-            user_input = "exit"
+print("Connection...")
+DB = db.init(DB_PATH, SCHEMA_PATH)
 
-        action = command_handler.handle(user_input)
+print("App started.")
 
-        if action is None:
-            continue
+while True:
+    try:
+        user_input = input(">>> ")
+    except KeyboardInterrupt:
+        user_input = "quit"
+    except EOFError:
+        user_input = "quit"
 
-        if action["type"].lower() in ("exit", "quit"):
-            if action["type"] == "quit":
-                CONTINUE = False
-            db.close()
-            break
+    action = handle(user_input)
 
-        if action["type"] == "table":
-            table_renderer.render(action["data"])
+    if action is None:
+        continue
 
-        if action["type"] == "add_work":
-            break#db.add_work(action["data"])
+    if action["type"] == "error":
+        print(action["msg"])
+
+    if action["type"] == "quit":
+        db.close(DB)
+        break
