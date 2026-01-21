@@ -1,12 +1,11 @@
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path("media.db")
 SCHEMA_PATH = Path("db/schema.sql")
 
 REWRITTING_PASSWORD = "REWRITE"
 
-def init_db():
+def init(DB_PATH):
     if DB_PATH.exists():
         print("DB already exists. Openning...")
     else:
@@ -19,12 +18,14 @@ def init_db():
         conn.executescript(f.read())
 
     conn.close()
+    print("DB ready.")
+
 
 if __name__ == "__main__":
-    init_db()
+    #init()
     print("DB ready.")
     while input(f"If you want to rewrite DB type '{REWRITTING_PASSWORD}': ") == REWRITTING_PASSWORD:
         print("Deleting...")
-        DB_PATH.unlink()
-        init_db()
+        #DB_PATH.unlink()
+        #init()
         print("DB succesfully rewritten.")

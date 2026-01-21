@@ -1,5 +1,5 @@
 import shlex
-import db
+#import db
 
 def handle_list(args):
     if not args:
@@ -7,11 +7,11 @@ def handle_list(args):
         return None
 
     if args[0] == "works":
-        rows = db.list_works()
+        rows = "data"#db.list_works()
         return {"type": "table", "data": rows}
 
     if args[0] == "genres":
-        rows = db.list_genres()
+        rows = "data"#db.list_genres()
         return {"type": "table", "data": rows}
 
     print("Unknown list target") 
@@ -53,10 +53,10 @@ def handle(cmd_str):
     cmd = parts[0]
     args = parts[1:]
 
-    if cmd == "list":
+    if cmd == "list" and 0:
         return handle_list(args)
 
-    if cmd == "add":
+    if cmd == "add" and 0:
         return handle_add(args)
 
     if cmd.lower() in ("exit", "quit"):
