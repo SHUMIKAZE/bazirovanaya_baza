@@ -1,3 +1,4 @@
 media.db
 *.db
 __pycache__/
+db.py
