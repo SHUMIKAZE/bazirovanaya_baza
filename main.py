@@ -24,6 +24,9 @@ while True:
     if action is None:
         continue
 
+    if action["type"] == "list":
+        print(action["target"])
+
     if action["type"] == "error":
         print(action["msg"])
 
