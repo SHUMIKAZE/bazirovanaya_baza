@@ -26,7 +26,8 @@ while True:
 
     if action["type"] == "list":
         data = db.get_data(DB, action["target"])
-        print(dict(data[0]))
+        for r in data:
+            print(dict(r))
 
     if action["type"] == "error":
         print(action["msg"])
