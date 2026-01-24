@@ -1,29 +1,20 @@
-from os import sched_yield
 from . import db_package
 from .command_handler import MainCommandHandler
+from . import commands
 
-def action_list(db_conn, action):
-    data = db_package.get_data(db_conn, action["target"])
-    for r in data:
-        print(dict(r))
 
-def action_error(_, action):
-    print(action["msg"])
-
-def action_quit(db_conn, _):
-    db_package.close(db_conn)
-    raise SystemExit
+COMMANDS = {
+    commands.ListCommand(),
+    commands.QuitCommand(),
+    commands.ErrorCommand(),
+}
 
 class App:
     def __init__(self, DB_PATH, SCHEMA_PATH):
         self.db = db_package
         self.media = self.db.init(DB_PATH, SCHEMA_PATH)
         self.running = True
-        self.commands = {
-            "list": action_list,
-            "quit": action_quit,
-            "error": action_error,
-        }
+        self.commands = {c.name: c for c in COMMANDS}
 
 
     def run(self):
@@ -47,14 +38,12 @@ class App:
                 continue
 
             handler = self.commands.get(action["type"])
-            if not handler:
-                continue
 
             if not handler:
                 print("Unknown action type:", action["type"])
                 continue
 
             try:
-                handler(self.media, action)
+                handler.execute(self, action)
             except SystemExit:
                 break

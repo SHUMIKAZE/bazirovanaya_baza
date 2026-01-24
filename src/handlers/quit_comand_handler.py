@@ -14,4 +14,7 @@ class QuitCommandHandler(CommandHandlerBase):
                 "msg": f"Unknown argument {args[0]}"
             }
         else:
-            return {"type": "quit"}
+            return {
+                "type": "quit",
+                "msg": "Quitting..."
+            }
