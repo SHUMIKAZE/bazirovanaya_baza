@@ -1,16 +1,8 @@
 from . import db_package
 from .command_handler import MainCommandHandler
-from . import commands
-
-
-COMMANDS = {
-    commands.ListCommand(),
-    commands.QuitCommand(),
-    commands.ErrorCommand(),
-}
 
 class App:
-    def __init__(self, DB_PATH, SCHEMA_PATH):
+    def __init__(self, DB_PATH, SCHEMA_PATH, COMMANDS):
         self.db = db_package
         self.media = self.db.init(DB_PATH, SCHEMA_PATH)
         self.running = True
@@ -35,6 +27,10 @@ class App:
 
 
             if action is None:
+                continue
+
+            if action["type"] == "error":
+                print(action["msg"])
                 continue
 
             handler = self.commands.get(action["type"])
