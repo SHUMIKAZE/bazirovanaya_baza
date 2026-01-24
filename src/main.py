@@ -14,6 +14,12 @@ def action_quit(db_conn, _):
     db.close(db_conn)
     raise SystemExit
 
+ACTIONS = {
+    "list": action_list,
+    "quit": action_quit,
+    "error": action_error,
+}
+
 def run():
     DB_PATH = Path("media.db")
     SCHEMA_PATH = Path("src/db_package/schema.sql")
@@ -40,8 +46,9 @@ def run():
         if action is None:
             continue
 
-        func_name = "action_" + action["type"]
-        handler = globals().get(func_name)
+        handler = ACTIONS.get(action["type"])
+        if not handler:
+            continue
 
         if not handler:
             print("Unknown action type:", action["type"])

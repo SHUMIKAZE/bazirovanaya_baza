@@ -42,9 +42,3 @@ class MainCommandHandler:
             return None
         
         return parts
-
-
-
-
-
-
