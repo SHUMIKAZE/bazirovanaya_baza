@@ -1,9 +1,11 @@
 from . import db_package
 from .command_handler import MainCommandHandler
 from .command_executor import COMMANDS
+from .config import DB_PATH, SCHEMA_PATH
+
 
 class App:
-    def __init__(self, DB_PATH, SCHEMA_PATH):
+    def __init__(self):
         self.db = db_package
         self.media = self.db.init(DB_PATH, SCHEMA_PATH)
         self.running = True
