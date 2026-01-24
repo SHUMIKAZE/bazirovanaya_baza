@@ -6,7 +6,7 @@ from .base import CommandHandlerBase
 class ListCommandHandler(CommandHandlerBase):
 
     def __init__(self):
-        self.args_hanlers = {
+        self.args_handlers = {
             "works": self.handle_works,
             "genres": self.handle_genres,
         }
@@ -18,13 +18,13 @@ class ListCommandHandler(CommandHandlerBase):
                 "msg": "What to list, works or genres?"
             }
 
-        if args[0] not in self.args_hanlers.keys():
+        if args[0] not in self.args_handlers.keys():
             return {
                 "type": "error",
                 "msg": f"Unknown argument {args[0]}"
             }
         
-        return self.args_hanlers[args[0]]()
+        return self.args_handlers[args[0]]()
     
     def handle_works(self):
         return {
