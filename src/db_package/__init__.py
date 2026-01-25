@@ -1,2 +1,2 @@
-from .connection import DBConnection, init, close
-from .queries import get_data
+from .connection import DBConnection
+from .queries import DBBase, DBGetList, get_data

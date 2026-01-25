@@ -4,6 +4,6 @@ class QuitCommand(CommandExecutor):
     name = "quit"
 
     def execute(self, app, args):
-        app.db.close(app.media)
+        app.db.media.conn.close()
         print(args["msg"])
         raise SystemExit

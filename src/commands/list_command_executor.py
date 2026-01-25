@@ -4,6 +4,6 @@ class ListCommand(CommandExecutor):
     name = "list"
 
     def execute(self, app, args):
-        data = app.db.get_data(app.media, args["target"])
+        data = app.db.get_list.execute(args)
         for r in data:
             print(dict(r))

@@ -1,4 +1,4 @@
-from . import db_package
+from .database import Database
 from .command_handler import MainCommandHandler
 from .command_executor import COMMANDS
 from .config import DB_PATH, SCHEMA_PATH
@@ -6,8 +6,8 @@ from .config import DB_PATH, SCHEMA_PATH
 
 class App:
     def __init__(self):
-        self.db = db_package
-        self.media = self.db.init(DB_PATH, SCHEMA_PATH)
+        self.db = Database(DB_PATH, SCHEMA_PATH)
+        self.db.media.connect()
         self.running = True
         self.commands = {c.name: c for c in COMMANDS}
 
