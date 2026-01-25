@@ -1,9 +1,16 @@
-from abc import ABC
-from typing import Any, List
+from abc import ABC, abstractmethod
+from sqlite3 import Connection
+from typing import Any, Dict, List
+
+
+
+
 
 class DBBase(ABC):
-    def __init__(self, conn) -> None:
+    @abstractmethod
+    def __init__(self, conn: Connection) -> None:
         ...
 
-    def execute(self, table) -> List[Any]:
+    @abstractmethod
+    def execute(self, table: Dict[str, str]) -> List[Any]:
         ...

@@ -1,8 +1,10 @@
-from . import commands
+from .commands import CommandExecutor, ListCommand, QuitCommand
 
 
 
-COMMANDS = {
-    commands.ListCommand(),
-    commands.QuitCommand(),
+
+
+COMMANDS: set[CommandExecutor] = {
+    ListCommand(),
+    QuitCommand()
 }

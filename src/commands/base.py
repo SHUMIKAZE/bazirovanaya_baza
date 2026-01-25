@@ -1,7 +1,14 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from typing import Dict
+from src.user import User
+
+
+
+
 
 class CommandExecutor(ABC):
     name = ""
-
-    def execute(self, app, args):
+    
+    @abstractmethod
+    def execute(self, user: User, args: Dict[str, str]):
         ...
