@@ -1,2 +1,2 @@
 from .base import DBBase
-from .db_get_list import DBGetList, get_data
+from .db_get_list import DBGetList
