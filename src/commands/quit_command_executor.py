@@ -11,7 +11,7 @@ class QuitCommand(CommandExecutor):
 
     def execute(self, user: User, args: Dict[str, str]) -> None:
         if user.db.media.conn is None:
-            raise ValueError()
+            raise ValueError("DB is not connected.")
 
         user.db.media.conn.close()
         print(args["msg"])

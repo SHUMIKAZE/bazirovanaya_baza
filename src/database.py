@@ -14,6 +14,6 @@ class Database:
         self.media.connect()
 
         if self.media.conn is None:
-            raise ValueError()
+            raise ValueError("DB is not connected.")
 
         self.get_list = DBGetList(self.media.conn)
