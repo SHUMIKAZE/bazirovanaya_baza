@@ -2,6 +2,28 @@ from typing import List
 
 
 from .base import CommandHandlerBase
+from ..comand_routing import CmdRouter, Command
+
+
+def create_list_router():
+    router = CmdRouter()
+
+    @router.handler(command="list works")
+    def handle_list_works(command: Command):
+        print("list works")
+    
+    @router.handler(command="list genres")
+    def handle_list_genres(command: Command):
+        print("list genres")
+    
+    @router.handler(command="list")
+    def handle_list(command: Command):
+        print("list")
+    
+    return router
+    
+    
+
 
 class ListCommandHandler(CommandHandlerBase):
 

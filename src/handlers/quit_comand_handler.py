@@ -1,6 +1,17 @@
 from typing import List
 
 from .base import CommandHandlerBase
+from ..comand_routing import CmdRouter, Command
+
+def create_quit_router():
+    router = CmdRouter()
+
+    @router.handler(command="quit")
+    def handle_quit(command: Command):
+        raise SystemExit
+    
+    return router
+
 
 class QuitCommandHandler(CommandHandlerBase):
 
