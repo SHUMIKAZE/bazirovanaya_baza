@@ -8,6 +8,7 @@ from .tokens import (
     EqualsToken,
     StringToken,
     EOFToken,
+    Token,
 )
 
 __all__ = [
@@ -22,6 +23,4 @@ class TokenType(Enum):
     EQUALS = EqualsToken
     STRING = StringToken
     EOF = EOFToken
-
-
 
