@@ -1,12 +1,17 @@
-from typing import ClassVar
+from typing import ClassVar, TYPE_CHECKING
 import re
+
+if TYPE_CHECKING:
+    from .tokens_scheme import TokenType
+
 
 class _BaseToken:
     pattern: ClassVar[re.Pattern[str]]
 
-    def __init__(self, match: str = '') -> None:
+    def __init__(self, match: str = '', *, token_type: 'TokenType') -> None:
         self.matched_string: str = match
         self.value: str = self._process_value(match)
+        self.token_type: 'TokenType' = token_type
 
     def _process_value(self, match: str) -> str:
         """Метод для постобработки найденной строки. По умолчанию возвращает как есть."""

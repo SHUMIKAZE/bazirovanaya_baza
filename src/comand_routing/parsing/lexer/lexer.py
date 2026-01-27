@@ -23,7 +23,7 @@ class Lexer(_LexerBase):
         self._original_cmd: Optional[str] = None
 
 
-    def tockenize(self, cmd: str) -> TokenFlow:
+    def tokenize(self, cmd: str) -> TokenFlow:
         flow = TokenFlow()
         self._original_cmd = cmd
 
@@ -35,7 +35,7 @@ class Lexer(_LexerBase):
             flow.insert_tokens(true_token)
             cmd = cmd[len(true_token):]
         else:
-            flow.insert_tokens(TokenType.EOF.value())
+            flow.insert_tokens(TokenType.EOF.value(token_type=TokenType.EOF)) # type: ignore
         
 
 
@@ -53,7 +53,7 @@ class Lexer(_LexerBase):
             token_cls = token_type.value
             match = token_cls.pattern.match(cmd)
             if match:
-                matched_tokens.append(token_cls(match.group(0)))
+                matched_tokens.append(token_cls(match.group(0), token_type=token_type))
 
         if not matched_tokens:
             error_position = len(self._original_cmd) - len(cmd)               # type: ignore
