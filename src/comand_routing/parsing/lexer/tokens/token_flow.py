@@ -20,6 +20,7 @@ class TokenFlow(deque):
     def pop_token(self) -> Token:
         return super().popleft()
     
+    @property
     def has_next(self) -> bool:
         return bool(self)
     
