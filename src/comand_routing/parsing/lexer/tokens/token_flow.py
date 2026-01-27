@@ -13,9 +13,13 @@ class TokenFlow(deque):
 
     def insert_tokens(self, *tokens: Token) -> None:
         self.extend(tokens)
-    
-    def next(self) -> Token:
-        return self.popleft()
 
     def peek(self) -> Token:
         return self[0]
+    
+    def pop_token(self) -> Token:
+        return super().popleft()
+    
+    def has_next(self) -> bool:
+        return bool(self)
+    

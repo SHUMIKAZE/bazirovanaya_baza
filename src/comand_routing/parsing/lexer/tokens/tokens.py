@@ -13,6 +13,9 @@ __all__ = [
 ]
 Token = _BaseToken
 
+class EOFToken(_BaseToken):
+    pattern: ClassVar[re.Pattern[str]] = re.compile(r'')
+
 class WhitespaceToken(_BaseToken):
     pattern: ClassVar[re.Pattern[str]] = re.compile(r'^\s+')
 

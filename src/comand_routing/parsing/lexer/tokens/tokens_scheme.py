@@ -6,7 +6,8 @@ from .tokens import (
     LongFlagToken,
     ShortFlagToken,
     EqualsToken,
-    StringToken
+    StringToken,
+    EOFToken,
 )
 
 __all__ = [
@@ -20,6 +21,7 @@ class TokenType(Enum):
     SHORT_FLAG = ShortFlagToken
     EQUALS = EqualsToken
     STRING = StringToken
+    EOF = EOFToken
 
 
 

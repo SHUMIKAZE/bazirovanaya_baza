@@ -4,7 +4,7 @@ import re
 class _BaseToken:
     pattern: ClassVar[re.Pattern[str]]
 
-    def __init__(self, match: str) -> None:
+    def __init__(self, match: str = '') -> None:
         self.matched_string: str = match
         self.value: str = self._process_value(match)
 

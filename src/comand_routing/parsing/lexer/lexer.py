@@ -17,7 +17,7 @@ class Lexer(_LexerBase):
         self,
         tokens: List[TokenType] = list(TokenType),
         conflict_resolver: type[TokenConflictResolver] = TokenConflictResolver,
-    ):
+    ) -> None:
         self._tokens = tokens
         self._conflict_resolver = conflict_resolver
         self._original_cmd: Optional[str] = None
@@ -34,6 +34,9 @@ class Lexer(_LexerBase):
 
             flow.insert_tokens(true_token)
             cmd = cmd[len(true_token):]
+        else:
+            flow.insert_tokens(TokenType.EOF.value())
+        
 
 
         self._original_cmd = None

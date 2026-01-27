@@ -7,6 +7,7 @@ from .tokens import (
     ShortFlagToken,
     StringToken,
     WhitespaceToken,
+    EOFToken,
     Token,
 )
 
@@ -25,6 +26,7 @@ class TokenConflictResolver:
         ShortFlagToken,   # Medium priority: Specific flag syntax
         IdentifierToken,  # Low priority: Generic alphanumeric pattern (catch-all for words)
         WhitespaceToken,  # Lowest priority: Separator
+        EOFToken,         # Lowest priority: End of input
     ]
 
     @classmethod
