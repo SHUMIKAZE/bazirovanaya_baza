@@ -1,0 +1,2 @@
+class ComandParserError(Exception):
+    pass
