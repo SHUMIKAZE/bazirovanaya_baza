@@ -7,11 +7,13 @@ if TYPE_CHECKING:
 
 class _BaseToken:
     pattern: ClassVar[re.Pattern[str]]
+    priority: ClassVar[int] = 0  # Default priority (Low)
+    token_type: ClassVar['TokenType']
+    should_ignore: ClassVar[bool] = False
 
-    def __init__(self, match: str = '', *, token_type: 'TokenType') -> None:
+    def __init__(self, match: str = '') -> None:
         self.matched_string: str = match
         self.value: str = self._process_value(match)
-        self.token_type: 'TokenType' = token_type
 
     def _process_value(self, match: str) -> str:
         """Метод для постобработки найденной строки. По умолчанию возвращает как есть."""

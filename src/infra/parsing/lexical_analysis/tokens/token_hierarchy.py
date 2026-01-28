@@ -1,15 +1,6 @@
-from typing import List, Type
+from typing import List
 
-from .tokens import (
-    EqualsToken,
-    IdentifierToken,
-    LongFlagToken,
-    ShortFlagToken,
-    StringToken,
-    WhitespaceToken,
-    EOFToken,
-    Token,
-)
+from .tokens import Token
 
 class TokenConflictResolver:
     """
@@ -17,26 +8,14 @@ class TokenConflictResolver:
     It uses a predefined hierarchy to select the most specific token type.
     """
 
-    # Priority order: The token type at index 0 has the highest priority.
-    # Specific matches (literals, complex structures) should generally be higher than generic ones.
-    _PRIORITY: List[Type[Token]] = [
-        StringToken,      # High priority: Specific complex structure
-        EqualsToken,      # High priority: Exact literal match
-        LongFlagToken,    # Medium priority: Specific flag syntax
-        ShortFlagToken,   # Medium priority: Specific flag syntax
-        IdentifierToken,  # Low priority: Generic alphanumeric pattern (catch-all for words)
-        WhitespaceToken,  # Lowest priority: Separator
-        EOFToken,         # Lowest priority: End of input
-    ]
-
     @classmethod
     def _get_sort_key(cls, token: Token) -> tuple[int, float]:
+        # Primary sort key: Length (descending) -> represented as negative number
         length_key = -len(token)
-
-        try:
-            priority_key = float(cls._PRIORITY.index(type(token)))
-        except ValueError:
-            priority_key = float('inf')
+        
+        # Secondary sort key: Priority (descending) -> represented as negative number
+        # Higher priority value means "more important", so we negate it for min() function or reverse logic
+        priority_key = -float(getattr(token, 'priority', 0))
 
         return length_key, priority_key
 

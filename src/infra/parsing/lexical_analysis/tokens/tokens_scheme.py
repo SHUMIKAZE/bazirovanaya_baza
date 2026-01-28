@@ -24,3 +24,6 @@ class TokenType(Enum):
     STRING = StringToken
     EOF = EOFToken
 
+# Inject token_type into token classes automatically
+for token_enum in TokenType:
+    token_enum.value.token_type = token_enum
