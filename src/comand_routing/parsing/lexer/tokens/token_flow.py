@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from collections import deque
 
 from .tokens import Token
@@ -17,8 +17,10 @@ class TokenFlow(deque):
     def peek(self) -> Token:
         return self[0]
     
-    def pop_token(self) -> Token:
-        return super().popleft()
+    def pop_token(self, count: int = 1) -> Union[Token, List[Token]]:
+        if count == 1:
+            return self.popleft()
+        return self.popleft() if count == 1 else [self.popleft() for _ in range(count)]
     
     @property
     def has_next(self) -> bool:

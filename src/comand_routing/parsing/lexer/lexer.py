@@ -31,9 +31,14 @@ class Lexer(_LexerBase):
 
             matched_tokens = self._get_matched_tokens(cmd)
             true_token = self._conflict_resolver.resolve(matched_tokens)
+            
+            if not true_token.token_type == TokenType.WHITESPACE:
+                flow.insert_tokens(true_token)
+                cmd = cmd[len(true_token):]
+                
+            else:
+                cmd = cmd[len(true_token):]
 
-            flow.insert_tokens(true_token)
-            cmd = cmd[len(true_token):]
         else:
             flow.insert_tokens(TokenType.EOF.value(token_type=TokenType.EOF)) # type: ignore
         
