@@ -1,11 +1,10 @@
-from src.comand_routing.parsing.lexer.lexer import Lexer
+from src.infra.parsing.lexical_analysis.lexer import Lexer
 
 from pprint import pprint
 
-lexer = Lexer()
+parser = Lexer()
 
-tokens = lexer.tockenize(
+tokens = parser.tokenize(
     cmd='git -fr --code --code-complete="fdf" status "with probels"'
 )
 
-pprint(tokens)
