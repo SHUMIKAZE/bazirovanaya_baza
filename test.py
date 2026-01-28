@@ -8,3 +8,5 @@ tokens = parser.tokenize(
     cmd='git -fr --code --code-complete="fdf" status "with probels"'
 )
 
+pprint(tokens)
+
