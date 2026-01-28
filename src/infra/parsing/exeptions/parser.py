@@ -12,3 +12,6 @@ class ParserError(ComandParserError):
 
         formatted_message = f"{message}\ncmd: {source}"
         super().__init__(formatted_message)
+
+class ASTError(ComandParserError):
+    pass
